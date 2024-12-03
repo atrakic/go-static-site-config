@@ -1,0 +1,23 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: go-static-site
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: go-static-site
+      branch: main
+  template:
+    metadata:
+      labels:
+        app: go-static-site
+        branch: main
+    spec:
+      containers:
+        - image: ghcr.io/atrakic/go-static-site:1729459608
+          name: go-static-site
+          ports:
+            - containerPort: 8080
